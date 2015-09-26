@@ -1,0 +1,77 @@
+Last login: Fri Sep 25 13:12:38 on ttys000
+Tings-MacBook-Air:~ Ting$ cd documents
+Tings-MacBook-Air:documents Ting$ ls
+Courses			Microsoft User Data	Spark
+Developer		Microsoft 用户数据	Ting's Paper
+GitHub			PhD required forms	temp
+Life in America		RDC Connections		海边的等待.docx
+Tings-MacBook-Air:documents Ting$ cd spark
+Tings-MacBook-Air:spark Ting$ ls
+sbt		scala-2.11.7	spark-1.5.0
+Tings-MacBook-Air:spark Ting$ cd s
+sbt/          scala-2.11.7/ spark-1.5.0/  
+Tings-MacBook-Air:spark Ting$ cd spark-1.5.0/
+Tings-MacBook-Air:spark-1.5.0 Ting$ ls
+CHANGES.txt		docker			pylintrc
+CONTRIBUTING.md		docs			python
+LICENSE			ec2			repl
+NOTICE			examples		sbin
+R			external		sbt
+README.md		extras			scalastyle-config.xml
+assembly		graphx			sql
+bagel			launcher		streaming
+bin			lib_managed		target
+build			make-distribution.sh	tools
+conf			mllib			tox.ini
+core			network			unsafe
+data			pom.xml			yarn
+dev			project
+Tings-MacBook-Air:spark-1.5.0 Ting$ cd bin
+Tings-MacBook-Air:bin Ting$ ls
+beeline			run-example.cmd		spark-sql
+beeline.cmd		run-example2.cmd	spark-submit
+load-spark-env.cmd	spark-class		spark-submit.cmd
+load-spark-env.sh	spark-class.cmd		spark-submit2.cmd
+pyspark			spark-class2.cmd	sparkR
+pyspark.cmd		spark-shell		sparkR.cmd
+pyspark2.cmd		spark-shell.cmd		sparkR2.cmd
+run-example		spark-shell2.cmd
+Tings-MacBook-Air:bin Ting$ cd spark-shell
+-bash: cd: spark-shell: Not a directory
+Tings-MacBook-Air:bin Ting$ spark-shell
+log4j:WARN No appenders could be found for logger (org.apache.hadoop.metrics2.lib.MutableMetricsFactory).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Using Spark's repl log4j profile: org/apache/spark/log4j-defaults-repl.properties
+To adjust logging level use sc.setLogLevel("INFO")
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 1.5.0
+      /_/
+
+Using Scala version 2.10.4 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_45)
+Type in expressions to have them evaluated.
+Type :help for more information.
+15/09/25 13:16:54 WARN MetricsSystem: Using default name DAGScheduler for source because spark.app.id is not set.
+Spark context available as sc.
+SQL context available as sqlContext.
+
+scala> var inputFile = sc.textFile("/Users/Ting/JavaWorkingPlace/CS5540/tweetsData.txt")
+inputFile: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[1] at textFile at <console>:21
+                                                                           
+scala> var counts = inputFile.flatMap(line => line.split(" ")).map(word => word.replaceAll("/|;|\\,|\\.|#|@|[0-9]|\\\\|\\!|:|^@.*|^http.*", "").trim()).filter(word => word.length > 0).map(word => (word,1)).reduceByKey(_ + _)
+counts: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[22] at reduceByKey at <console>:27
+
+scala> counts.cache()
+res17: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[22] at reduceByKey at <console>:27
+
+scala> counts.saveAsTextFile("/Users/Ting/output4")
+
+                                                                                
+scala> counts.cache()
+res19: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[22] at reduceByKey at <console>:27
+
+scala>
+
