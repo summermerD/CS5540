@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="/resources/css/lib/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/css/lib/AdminLTE/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/resources/css/lib/AdminLTE/css/skins/_all-skins.min.css">
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/funnel.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+  <style>
+.firstTitle{
+    float: left;
+    border:1px solid lightgray;
+    border-radius:5px;
+    padding:5px;
+    margin:10px;
+    font-weight: bold;
+    background-color:rgb(245,245,245);
+    width:550px;
+    height: 103px;
+    z-index: 0;
+}
+
+.topContent{
+    font-weight: normal;
+    background-color:white;
+    padding:5px;
+    margin:5px;
+    cursor:auto;
+    overflow: auto;
+    height: 60px;
+    font-size: 15px;
+    z-index: 1;
+}
+    
+    </style>
+</head>
+<body onload = "retweet()" class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>S</b>A</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Tweets</b>Analysis</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+       
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/"><i class="fa fa-circle-o"></i> Home </a></li>
+            <li><a href="tweetWithtime.html"><i class="fa fa-circle-o text-blue"></i> <span>Tweet number timeline</span></a></li>
+            <li><a href="hashtag.html"><i class="fa fa-circle-o text-aqua"></i> <span>Hashtag timeline</span></a></li>
+            <li><a href="hottesHashtag.html"><i class="fa fa-circle-o text-gray"></i> <span>Top 10 hottest hashtags</span></a></li>
+            <li><a href="hottestlanguage.html"><i class="fa fa-circle-o text-lime"></i> <span>Top 10 hottest languages</span></a></li>
+            <li><a href="hottestWord.html"><i class="fa fa-circle-o text-purple"></i> <span>Top 10 hottest words</span></a></li>
+            <li><a href="hottestRetweet.html"><i class="fa fa-circle-o text-green"></i> <span>Top 10 hottest retweets</span></a></li>
+            <li><a href="userVerification.html"><i class="fa fa-circle-o text-olive"></i> <span>User verification analysis</span></a></li>
+            
+            <li><a href="userMostTweets.html"><i class="fa fa-circle-o text-red"></i> <span>Top 10 users of most tweets</span></a></li> 
+            <li><a href="userMostFollower.html"><i class="fa fa-circle-o text-yellow"></i> <span>Top 10 users of most followers</span></a></li>
+            <li><a href="userMostFriend.html"><i class="fa fa-circle-o text-orange"></i> <span>Top 10 users of most friends</span></a></li> 
+          </ul>
+          </ul>
+        </li>
+       
+        </selection> 
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
+        
+        <li class="active">Visualization</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+         <div class = "row">
+                
+                  <div class="input-group">
+                      <script>
+                          function retweet() {                                                        
+                              $.ajax({  
+		                          type: "GET",  
+		                          url: "http://localhost:8080/retweet",
+		                          success: function(result){  
+                                      console.log(result[0].text);
+                                      retweets(result);
+			                      },
+		                          failure: function(result){
+			                         alert ("failure");
+		                          }
+                              }); 
+                          }
+                      </script>
+                    </div>
+                
+			</div>
+           <div>
+           <h3 align="center">TOP 10 RETWEETED TWEETS USED IN RETWEETS</h3>
+            <div class="firstTitle"><div id= "f1">No.1 (Retweet number:</div> <div id="No1" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f2">No.2 (Retweet number:</div> <div id="No2" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f3">No.3 (Retweet number:</div> <div id="No3" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f4">No.4 (Retweet number:</div> <div id="No4" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f5">No.5 (Retweet number:</div> <div id="No5" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f6">No.6 (Retweet number:</div> <div id="No6" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f7">No.7 (Retweet number:</div> <div id="No7" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f8">No.8 (Retweet number:</div> <div id="No8" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f9">No.9 (Retweet number:</div> <div id="No9" class = "topContent"></div></div>
+            <div class="firstTitle"><div id= "f10">No.10 (Retweet number:</div> <div id="No10" class = "topContent"></div></div>
+<script>
+    function retweets(data) {
+        $("#No1").html(data[0].text);$("#f1").append(data[0].retweetCount+")");
+        $("#No2").html(data[1].text);$("#f2").append(data[1].retweetCount+")");
+        $("#No3").html(data[2].text);$("#f3").append(data[2].retweetCount+")");
+        $("#No4").html(data[3].text);$("#f4").append(data[3].retweetCount+")");
+        $("#No5").html(data[4].text);$("#f5").append(data[4].retweetCount+")");
+        $("#No6").html(data[5].text);$("#f6").append(data[5].retweetCount+")");
+        $("#No7").html(data[6].text);$("#f7").append(data[6].retweetCount+")");
+        $("#No8").html(data[7].text);$("#f8").append(data[7].retweetCount+")");
+        $("#No9").html(data[8].text);$("#f9").append(data[8].retweetCount+")");
+        $("#No10").html(data[9].text);$("#f10").append(data[9].retweetCount+")");
+    }
+</script>
+           </div>
+     
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+ 
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.1.4 -->
+
+<!-- Bootstrap 3.3.5 -->
+<script src="/resources/css/lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="/resources/css/lib/plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="/resources/css/lib/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/resources/css/lib/AdminLTE/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/resources/css/lib/AdminLTE/js/demo.js"></script>
+<!-- page script -->
+
+</body>
+</html>

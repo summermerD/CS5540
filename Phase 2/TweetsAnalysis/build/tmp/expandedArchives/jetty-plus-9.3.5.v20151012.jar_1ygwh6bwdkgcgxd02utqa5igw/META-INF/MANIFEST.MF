@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: joakim
+Build-Jdk: 1.8.0_60
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.3.5.v20151012
+url: http://www.eclipse.org/jetty
+Bnd-LastModified: 1444688201580
+Bundle-Classpath: .
+Bundle-Copyright: Copyright (c) 2008-2015 Mort Bay Consulting Pty. Ltd.
+Bundle-Description: Jetty module for Jetty :: Plus
+Bundle-DocURL: http://www.eclipse.org/jetty
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .eclipse.org/org/documents/epl-v10.php
+Bundle-ManifestVersion: 2
+Bundle-Name: Jetty :: Plus
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-SymbolicName: org.eclipse.jetty.plus
+Bundle-Vendor: Eclipse Jetty Project
+Bundle-Version: 9.3.5.v20151012
+Export-Package: org.eclipse.jetty.plus.annotation;version="9.3.5";uses
+ :="javax.naming,javax.servlet,org.eclipse.jetty.servlet,org.eclipse.j
+ etty.webapp",org.eclipse.jetty.plus.jndi;version="9.3.5";uses:="javax
+ .naming,javax.transaction",org.eclipse.jetty.plus.security;version="9
+ .3.5";uses:="javax.naming,javax.servlet,org.eclipse.jetty.security,or
+ g.eclipse.jetty.server",org.eclipse.jetty.plus.webapp;version="9.3.5"
+ ;uses:="javax.naming,org.eclipse.jetty.util,org.eclipse.jetty.webapp,
+ org.eclipse.jetty.xml"
+Import-Package: javax.servlet;version="[2.6.0,3.2)",javax.transaction;
+ version="[1.1,1.3)",org.eclipse.jetty.jndi;version="[9.3.5,9.3.6)",or
+ g.eclipse.jetty.jndi.local;version="[9.3.5,9.3.6)",org.eclipse.jetty.
+ security;version="[9.3.5,9.3.6)",org.eclipse.jetty.server;version="[9
+ .3.5,9.3.6)",org.eclipse.jetty.server.handler;version="[9.3.5,9.3.6)"
+ ,org.eclipse.jetty.servlet;version="[9.3.5,9.3.6)",org.eclipse.jetty.
+ util;version="[9.3.5,9.3.6)",org.eclipse.jetty.util.log;version="[9.3
+ .5,9.3.6)",org.eclipse.jetty.util.resource;version="[9.3.5,9.3.6)",or
+ g.eclipse.jetty.util.security;version="[9.3.5,9.3.6)",org.eclipse.jet
+ ty.webapp;version="[9.3.5,9.3.6)",org.eclipse.jetty.xml;version="[9.3
+ .5,9.3.6)",javax.naming,javax.sql
+Originally-Created-By: Apache Maven Bundle Plugin
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-2.4.1.201501161923
+

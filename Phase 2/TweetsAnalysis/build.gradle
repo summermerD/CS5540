@@ -1,0 +1,76 @@
+group 'JavaSpark'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    executableWar
+
+    compile.exclude group: 'org.jboss.netty'
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.4'
+
+    compile 'org.twitter4j:twitter4j-stream:3.0.6'
+
+    compile 'org.apache.spark:spark-sql_2.10:1.5.2'
+    compile 'org.apache.spark:spark-core_2.10:1.5.2'
+    compile 'org.apache.spark:spark-streaming_2.10:1.5.2'
+    compile 'org.apache.spark:spark-streaming-twitter_2.10:1.5.2'
+
+    compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
+
+    executableWar 'org.eclipse.jetty:jetty-server:9.3.5.v20151012'
+    executableWar 'org.eclipse.jetty:jetty-webapp:9.3.5.v20151012'
+    executableWar 'org.eclipse.jetty:jetty-annotations:9.3.5.v20151012'
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    testCompile 'junit:junit:4.11'
+}
+
+sourceSets.all {
+    compileClasspath += configurations.executableWar
+}
+
+war {
+    from {
+        configurations.executableWar.collect {
+            return it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    from "$buildDir/classes/main"
+    exclude '**/META-INF/*.SF', '**/META-INF/*.RSA', '**/META-INF/*.DSA', 'home/playground/configs', 'home/playground/resources', 'home/playground/models', 'home/playground/services'
+
+    manifest {
+        attributes 'Main-Class': 'home.playground.Startup'
+    }
+}
+
+idea {
+    module {
+        scopes.COMPILE.plus += [configurations.executableWar]
+    }
+}
+
+eclipse {
+    classpath {
+        plusConfigurations += [configurations.executableWar]
+    }
+}
