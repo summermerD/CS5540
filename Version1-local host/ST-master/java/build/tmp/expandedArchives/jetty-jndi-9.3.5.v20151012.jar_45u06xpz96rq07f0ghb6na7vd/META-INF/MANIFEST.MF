@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: joakim
+Build-Jdk: 1.8.0_60
+Implementation-Vendor: Eclipse.org - Jetty
+Implementation-Version: 9.3.5.v20151012
+url: http://www.eclipse.org/jetty
+Bnd-LastModified: 1444688179942
+Bundle-Classpath: .
+Bundle-Copyright: Copyright (c) 2008-2015 Mort Bay Consulting Pty. Ltd.
+Bundle-Description: Jetty module for Jetty :: JNDI Naming
+Bundle-DocURL: http://www.eclipse.org/jetty
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .eclipse.org/org/documents/epl-v10.php
+Bundle-ManifestVersion: 2
+Bundle-Name: Jetty :: JNDI Naming
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-SymbolicName: org.eclipse.jetty.jndi
+Bundle-Vendor: Eclipse Jetty Project
+Bundle-Version: 9.3.5.v20151012
+Export-Package: org.eclipse.jetty.jndi;version="9.3.5";uses:="javax.na
+ ming,javax.naming.spi,javax.sql,org.eclipse.jetty.util.component,org.
+ eclipse.jetty.util.log",org.eclipse.jetty.jndi.factories;version="9.3
+ .5";uses:="javax.mail,javax.naming,javax.naming.spi",org.eclipse.jett
+ y.jndi.java;version="9.3.5";uses:="javax.naming,javax.naming.spi,org.
+ eclipse.jetty.jndi",org.eclipse.jetty.jndi.local;version="9.3.5";uses
+ :="javax.naming,org.eclipse.jetty.jndi"
+Import-Package: org.eclipse.jetty.server.handler;version="[9.3.5,9.3.6
+ )",org.eclipse.jetty.util.component;version="[9.3.5,9.3.6)",org.eclip
+ se.jetty.util.log;version="[9.3.5,9.3.6)",org.eclipse.jetty.util.secu
+ rity;version="[9.3.5,9.3.6)",javax.mail;version="[1.4,2)",javax.namin
+ g,javax.naming.spi,javax.sql
+Originally-Created-By: Apache Maven Bundle Plugin
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-2.4.1.201501161923
+

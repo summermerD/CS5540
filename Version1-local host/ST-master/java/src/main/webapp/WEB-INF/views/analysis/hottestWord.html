@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="/resources/css/lib/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/css/lib/AdminLTE/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/resources/css/lib/AdminLTE/css/skins/_all-skins.min.css">
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/funnel.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body onload = "pyramid()" class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>S</b>A</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Tweets</b>Analysis</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+       
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/"><i class="fa fa-circle-o"></i> Home </a></li>
+            <li><a href="tweetWithtime.html"><i class="fa fa-circle-o text-blue"></i> <span>Tweet number timeline</span></a></li>
+            <li><a href="hashtag.html"><i class="fa fa-circle-o text-aqua"></i> <span>Hashtag timeline</span></a></li>
+            <li><a href="hottesHashtag.html"><i class="fa fa-circle-o text-gray"></i> <span>Top 10 hottest hashtags</span></a></li>
+            <li><a href="hottestlanguage.html"><i class="fa fa-circle-o text-lime"></i> <span>Top 10 hottest languages</span></a></li>
+            <li><a href="hottestWord.html"><i class="fa fa-circle-o text-purple"></i> <span>Top 10 hottest words</span></a></li>
+            <li><a href="hottestRetweet.html"><i class="fa fa-circle-o text-green"></i> <span>Top 10 hottest retweets</span></a></li>
+            <li><a href="userVerification.html"><i class="fa fa-circle-o text-olive"></i> <span>User verification analysis</span></a></li>
+           
+            <li><a href="userMostTweets.html"><i class="fa fa-circle-o text-red"></i> <span>Top 10 users of most tweets</span></a></li> 
+            <li><a href="userMostFollower.html"><i class="fa fa-circle-o text-yellow"></i> <span>Top 10 users of most followers</span></a></li>
+            <li><a href="userMostFriend.html"><i class="fa fa-circle-o text-orange"></i> <span>Top 10 users of most friends</span></a></li> 
+          </ul>
+          </ul>
+        </li>
+       
+        </selection> 
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
+        
+        <li class="active">Visualization</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+         <div class = "row">
+                
+                  <div class="input-group">
+                      <script>
+                          function pyramid() {                                                        
+                              $.ajax({  
+		                          type: "GET",  
+		                          url: "http://localhost:8080/words",
+		                          success: function(result){  
+                                      console.log(result);
+                                      keyword(result);
+			                      },
+		                          failure: function(result){
+			                         alert ("failure");
+		                          }
+                              }); 
+                          }
+                      </script>
+                    </div>
+                
+			</div>
+           <div>
+            <div id="container" style="width: 600px; height: 400px; margin: 0 auto"></div>
+<script>
+// Load the fonts
+Highcharts.createElement('link', {
+   href: '//fonts.googleapis.com/css?family=Signika:400,700',
+   rel: 'stylesheet',
+   type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+// Add the background image to the container
+Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
+   proceed.call(this);
+   this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
+});
+
+
+Highcharts.theme = {
+   colors: ["#f45b5b", "#8085e9", "#8d4654", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: null,
+      style: {
+         fontFamily: "Signika, serif"
+      }
+   },
+   title: {
+      style: {
+         color: 'black',
+         fontSize: '20px',
+      }
+   },
+   subtitle: {
+      style: {
+         color: 'black'
+      }
+   },
+   tooltip: {
+      borderWidth: 0
+   },
+   legend: {
+      itemStyle: {
+         fontWeight: 'bold',
+         fontSize: '15px'
+      }
+   },
+   xAxis: {
+      labels: {
+         style: {
+            color: '#6e6e70'
+         }
+      }
+   },
+   yAxis: {
+      labels: {
+         style: {
+            color: '#6e6e70'
+         }
+      }
+   },
+   plotOptions: {
+      series: {
+         shadow: true
+      },
+      candlestick: {
+         lineColor: '#404048'
+      },
+      map: {
+         shadow: false
+      }
+   },
+
+   // Highstock specific
+   navigator: {
+      xAxis: {
+         gridLineColor: '#D0D0D8'
+      }
+   },
+   rangeSelector: {
+      buttonTheme: {
+         fill: 'white',
+         stroke: '#C0C0C8',
+         'stroke-width': 1,
+         states: {
+            select: {
+               fill: '#D0D0D8'
+            }
+         }
+      }
+   },
+   scrollbar: {
+      trackBorderColor: '#C0C0C8'
+   },
+
+   // General
+   background2: '#E0E0E8'
+   
+};
+    function keyword(data){
+        console.log(data);      
+    $('#container').highcharts({
+        chart: {
+            type: 'pyramid',
+            marginRight: 100
+        },
+        title: {
+            text: 'TOP 10 HOTTEST WORDS IN TWITTER',
+            x: -50
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                    softConnector: true
+                }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: 'Frequency',
+            data: data
+        }]
+        });
+}
+    // Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+</script>
+           </div>
+     
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+ 
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.1.4 -->
+
+<!-- Bootstrap 3.3.5 -->
+<script src="/resources/css/lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="/resources/css/lib/plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="/resources/css/lib/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/resources/css/lib/AdminLTE/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/resources/css/lib/AdminLTE/js/demo.js"></script>
+<!-- page script -->
+
+</body>
+</html>
